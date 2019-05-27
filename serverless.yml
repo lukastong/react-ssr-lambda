@@ -1,0 +1,26 @@
+service: react-demo
+plugins:
+  - serverless-webpack
+  - serverless-offline
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+    packager: "yarn"
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: ap-northeast-1
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: get
+          cors: false
+      - http:
+          path: /static
+          method: get
+          cors: false
